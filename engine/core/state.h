@@ -33,7 +33,7 @@ namespace state {
 		const char* title = "My Engine";
 
 		bool fullscreen = false;
-		bool resizable = true;    //not changeable after init
+		bool resizable = true;
 		bool transparent = false; //not changeable after init
 		bool clickThrough = false;//only for Windows
 		bool vsync = true;
