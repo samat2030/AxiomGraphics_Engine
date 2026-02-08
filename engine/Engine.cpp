@@ -1,4 +1,4 @@
-﻿#include "core/core.cpp"
+#include "core/core.cpp"
 
 int main() {
 	core::core("auto");

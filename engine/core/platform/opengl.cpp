@@ -20,12 +20,12 @@ inline bool checkWindows10or11(GLFWwindow* window) {
 	if (!window)
 		return false;
 
-	// проверка, что Win32 handle существует
+	// РїСЂРѕРІРµСЂРєР°, С‡С‚Рѕ Win32 handle СЃСѓС‰РµСЃС‚РІСѓРµС‚
 	HWND hwnd = glfwGetWin32Window(window);
 	if (!hwnd)
 		return false;
 
-	// проверка версии Windows >= 10
+	// РїСЂРѕРІРµСЂРєР° РІРµСЂСЃРёРё Windows >= 10
 	HMODULE hMod = GetModuleHandleW(L"ntdll.dll");
 	if (!hMod)
 		return false;
@@ -46,18 +46,18 @@ inline bool checkWindows10or11(GLFWwindow* window) {
 
 #else
 
-  // не Windows — всегда false
+  // РЅРµ Windows вЂ” РІСЃРµРіРґР° false
 inline bool checkWindows10or11(void*) {
 	return false;
 }
 
 #endif
 
-//0 - ок
-//1 - уже инициализировано
-//2 - еще не инициализировано
-//100 - не один из поддерживаемых API не удалось инициализировать
-//101 - OpenGL не поддерживается на этом устройстве
+//0 - РѕРє
+//1 - СѓР¶Рµ РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅРѕ
+//2 - РµС‰Рµ РЅРµ РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅРѕ
+//100 - РЅРµ РѕРґРёРЅ РёР· РїРѕРґРґРµСЂР¶РёРІР°РµРјС‹С… API РЅРµ СѓРґР°Р»РѕСЃСЊ РёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°С‚СЊ
+//101 - OpenGL РЅРµ РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ РЅР° СЌС‚РѕРј СѓСЃС‚СЂРѕР№СЃС‚РІРµ
 //110 - 
 
 namespace p { // hiden namespace
@@ -72,7 +72,7 @@ namespace p { // hiden namespace
 		}
 		if (!glfwInit())
 			return false;
-		// пробуем создать контекст OpenGL 3.3
+		// РїСЂРѕР±СѓРµРј СЃРѕР·РґР°С‚СЊ РєРѕРЅС‚РµРєСЃС‚ OpenGL 3.3
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -115,7 +115,7 @@ namespace p { // hiden namespace
 	};
 	CopyWindowConfig copyWindowConfig;
 
-	// рефлизация под windowConfig
+	// СЂРµС„Р»РёР·Р°С†РёСЏ РїРѕРґ windowConfig
 	void setPositionP(int x, int y) {
 		if (status != INITIALIZED || !window || state::windowConfig.fullscreen == true) return;
 		glfwSetWindowPos(window, x, y);
@@ -169,12 +169,12 @@ namespace p { // hiden namespace
 		return "Unknown";
 	}
 
-	//функции пользователя
+	//С„СѓРЅРєС†РёРё РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 	void(*closeFunc)() = nullptr;
 
 
 
-	//системные функции
+	//СЃРёСЃС‚РµРјРЅС‹Рµ С„СѓРЅРєС†РёРё
 	struct WindowData {
 		void (*userCallback)(int, int) = nullptr;
 	};
@@ -213,15 +213,15 @@ namespace gl {
 	}
 	
 	
-	// методы
-	// управление окном
+	// РјРµС‚РѕРґС‹
+	// СѓРїСЂР°РІР»РµРЅРёРµ РѕРєРЅРѕРј
 	int createWindow() {
-		//прочие проврерки
+		//РїСЂРѕС‡РёРµ РїСЂРѕРІСЂРµСЂРєРё
 		if (p::status == p::INITIALIZED) {
 			return 1;
 		}
 		
-		//инициализация OpenGL
+		//РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ OpenGL
 		if (!glfwInit())
 			return 101;
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -272,9 +272,9 @@ namespace gl {
 			}
 #endif
 		}
-		//успешно проинициализировано
+		//СѓСЃРїРµС€РЅРѕ РїСЂРѕРёРЅРёС†РёР°Р»РёР·РёСЂРѕРІР°РЅРѕ
 		p::status = p::INITIALIZED;
-		//все - ок
+		//РІСЃРµ - РѕРє
 		return 0;
 	}
 	int quit() {
@@ -285,7 +285,7 @@ namespace gl {
 		return 0;
 	}
 
-	// rule/set методы
+	// rule/set РјРµС‚РѕРґС‹
 	void allowResize(bool allow) {
 		if (p::status != p::INITIALIZED || !p::window) return;
 		glfwSetWindowAttrib(p::window, GLFW_RESIZABLE, allow ? GLFW_TRUE : GLFW_FALSE);
@@ -300,7 +300,7 @@ namespace gl {
 	}
 
 
-	// event методы
+	// event РјРµС‚РѕРґС‹
 	void setCloseFunc(void (*func)()) {
 		if (p::status != p::INITIALIZED || !p::window) return;
 		p::closeFunc = func;
@@ -311,7 +311,7 @@ namespace gl {
 	void setResizeFunc(void (*func)(int, int)) {
 		if (p::status != p::INITIALIZED || !p::window) return;
 
-		// Сохраняем указатель на функцию в "карман" окна
+		// РЎРѕС…СЂР°РЅСЏРµРј СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С„СѓРЅРєС†РёСЋ РІ "РєР°СЂРјР°РЅ" РѕРєРЅР°
 		static p::WindowData data;
 		data.userCallback = func;
 		glfwSetWindowUserPointer(p::window, &data);
@@ -329,7 +329,7 @@ namespace gl {
 
 
 
-	// системные методы
+	// СЃРёСЃС‚РµРјРЅС‹Рµ РјРµС‚РѕРґС‹
 	void update() {
 		if (p::status != p::INITIALIZED || !p::window) return;
 		glfwPollEvents();
@@ -346,7 +346,7 @@ namespace gl {
 		}
 
 
-		//проверка windowConfig
+		//РїСЂРѕРІРµСЂРєР° windowConfig
 		if (state::windowConfig.width != p::copyWindowConfig.width ||
 			state::windowConfig.height != p::copyWindowConfig.height) {
 			glfwSetWindowSize(p::window, state::windowConfig.width, state::windowConfig.height);
@@ -417,18 +417,18 @@ namespace gl {
 			if (versionStr) {
 				int major = 0, minor = 0;
 				sscanf(versionStr, "%d.%d", &major, &minor);
-				return major * 100 + minor * 10; // например, 3.3 -> 330
+				return major * 100 + minor * 10; // РЅР°РїСЂРёРјРµСЂ, 3.3 -> 330
 			}
-			return 0; // не удалось получить версию
+			return 0; // РЅРµ СѓРґР°Р»РѕСЃСЊ РїРѕР»СѓС‡РёС‚СЊ РІРµСЂСЃРёСЋ
 		}
 		else {
-			// Формат числа: ddmmyyyyvv
-			// dd   - день месяца (без ведущего нуля, если <10, например 8)
-			// mm   - месяц (например, 02)
-			// yyyy - год (например, 2026)
-			// vv   - версия (по умолчанию 00)
-			// Пример: 802202600 -> 8 февраля 2026, версия 00
-			// Пример: 1106202558 -> 11 июня 2025, версия 58
+			// Р¤РѕСЂРјР°С‚ С‡РёСЃР»Р°: ddmmyyyyvv
+			// dd   - РґРµРЅСЊ РјРµСЃСЏС†Р° (Р±РµР· РІРµРґСѓС‰РµРіРѕ РЅСѓР»СЏ, РµСЃР»Рё <10, РЅР°РїСЂРёРјРµСЂ 8)
+			// mm   - РјРµСЃСЏС† (РЅР°РїСЂРёРјРµСЂ, 02)
+			// yyyy - РіРѕРґ (РЅР°РїСЂРёРјРµСЂ, 2026)
+			// vv   - РІРµСЂСЃРёСЏ (РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ 00)
+			// РџСЂРёРјРµСЂ: 802202600 -> 8 С„РµРІСЂР°Р»СЏ 2026, РІРµСЂСЃРёСЏ 00
+			// РџСЂРёРјРµСЂ: 1106202558 -> 11 РёСЋРЅСЏ 2025, РІРµСЂСЃРёСЏ 58
 			return 802202600;
 		}
 	}
