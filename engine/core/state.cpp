@@ -3,4 +3,4 @@
 
 namespace state {
 	WindowConfig windowConfig;
-}
+} 

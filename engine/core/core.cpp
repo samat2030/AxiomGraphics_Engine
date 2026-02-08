@@ -64,7 +64,7 @@ namespace q {
 			else {
 				std::cerr << "ERROR:2:NOT_INITIALIZED)\n";
 				exit(2);
-			}
+			} 
 		}
 		int init() {
 			if (selectedAPI == core::OPENGL) {

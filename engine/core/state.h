@@ -82,7 +82,7 @@ namespace state {
 			void (*setPositionPP)(int, int),
 			void (*getPositionPP)(int&, int&),
 			void (*minimizePP)(),
-			void (*maximizePP)(),
+			void (*maximizePP)(), 
 			void (*hidePP)(),
 			void (*showPP)(),
 			void (*setIconPP)(const char*),

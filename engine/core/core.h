@@ -8,7 +8,7 @@ namespace core {
     extern state::WindowConfig& windowConfig;
     enum API {
         OPENGL,
-        VULKAN,
+        VULKAN, 
         DIRECTX,
         AUTO,
         NONE
